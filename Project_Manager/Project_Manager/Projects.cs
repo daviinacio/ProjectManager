@@ -11,30 +11,26 @@ using System.Windows.Forms;
 
 namespace Project_Manager {
     public partial class Projects : Form {
-        int defaultOpct = 85;
-        int opct = 0;
 
         bool canClose = true, isFixed = false;
-
-        Color backColor = ColorTranslator.FromHtml("#202020");
 
         ImageList imageListSmall;
 	    ImageList imageListLarge;
 
-        List<ProjectItem> projects;
+        List<String> projects;
 
         public Projects() {
             InitializeComponent();
-            projects = new List<ProjectItem>();
+            projects = new List<String>();
         }
 
         // Form methods
 
         private void Projects_Load(object sender, EventArgs e) {
-            setOpacity(defaultOpct);
-            project_lists.BackColor = backColor;
-            menu.BackColor = backColor;
-            TopMost = true;
+            project_lists.BackColor = Program.backColor;
+            menu.BackColor = Program.backColor;
+            BackColor = Program.borderColor;
+            //TopMost = true;
             project_lists.LabelEdit = true;
             //project_lists.View = View.Details;
 
@@ -51,8 +47,8 @@ namespace Project_Manager {
             project_lists.Sorting = SortOrder.Ascending;
             //fadeUp(20, 5);
 
-            projects.Add(new ProjectItem("C:\\Users\\Davi\\Desktop\\PR0"));
-            projects.Add(new ProjectItem("C:\\Users\\Davi\\Desktop\\PR1"));
+            projects.Add("C:\\Users\\Davi\\Desktop\\PR0\\PR0.prini");
+            projects.Add("C:\\Users\\Davi\\Desktop\\PR1\\PR1.prini");
 
             update();
         }
@@ -72,7 +68,7 @@ namespace Project_Manager {
             //MessageBox.Show("Nome: ");
 
             for (int i = 0; i < projects.Count; i++) {
-                ProjectItem project = projects.ToArray()[i];
+                ProjectItem project = new ProjectItem(projects.ToArray()[i]);
 
                 //MessageBox.Show("Nome: " + project.getName());
                 //MessageBox.Show("Icon: " + project.getIcon());
@@ -91,10 +87,18 @@ namespace Project_Manager {
             project_lists.SmallImageList = imageListSmall;
         }
 
+        private void Projects_Activated(object sender, EventArgs e) {
+            //fadeUp(20, 5, 85);
+            setOpacity(86);
+        }
+
         private void Projects_Deactivate(object sender, EventArgs e) {
             if (canClose && !isFixed) {
-                fadeDown(20, 5);
-                this.Close();
+                fadeDown(10, 5);
+                if (Program.projectStarter.Visible)
+                    this.Hide();
+                else
+                    Application.Exit();
             }
         }
 
@@ -108,25 +112,25 @@ namespace Project_Manager {
             if (project_lists.SelectedIndices.Count <= 0) { return; }
             int item = project_lists.SelectedIndices[0];
 
-            MessageBox.Show("Remove " + projects.ToArray()[item].getName());
+            MessageBox.Show("Remove " + projects.ToArray()[item]);
         }
 
         private void edit_menu_Click(object sender, EventArgs e) {
             if (project_lists.SelectedIndices.Count <= 0) { return; }
             int item = project_lists.SelectedIndices[0];
 
-            MessageBox.Show("Edit " + projects.ToArray()[item].getName());
+            MessageBox.Show("Edit " + projects.ToArray()[item]);
         }
 
         private void fix_menu_Click(object sender, EventArgs e) {
             isFixed = !isFixed;
 
             if (!isFixed) {
-                fix_menu.BackColor = backColor;
+                fix_menu.BackColor = Program.backColor;
                 fix_menu.ForeColor = SystemColors.Window;
             } else {
                 fix_menu.BackColor = BackColor;
-                fix_menu.ForeColor = backColor;
+                fix_menu.ForeColor = Program.backColor;
             }
         }
 
@@ -144,19 +148,26 @@ namespace Project_Manager {
             if (project_lists.SelectedIndices.Count <= 0) { return; }
             int item = project_lists.SelectedIndices[0];
 
-            MessageBox.Show("Open " +  projects.ToArray()[item].getName());
+            Program.projectStarter = new ProjectStarter(projects.ToArray()[item]);
+            Program.projectStarter.Show();
+
+            //MessageBox.Show("Open " +  projects.ToArray()[item].getName());
         }
 
         // Fade methods
 
-        private void fadeUp(int delay, int increment) {
-            while (opct < defaultOpct) {
-                setOpacity(opct + increment);
+        //int defaultOpct = 85;
+        int opct = 0;
+
+        private void fadeUp(int delay, int increment, int value) {
+            while (opct < value) {
+                opct += increment;
+                updateOpacity();
                 Thread.Sleep(delay);
             }
         }
         private void fadeDown(int delay, int decrement) {
-            while(opct > 20) {
+            while (opct > 20) {
                 setOpacity(opct - decrement);
                 Thread.Sleep(delay);
             }
@@ -165,9 +176,8 @@ namespace Project_Manager {
             this.opct = opacity;
             updateOpacity();
         }
-        private void updateOpacity(){
-            this.Opacity = (double) opct / 100;
+        private void updateOpacity() {
+            this.Opacity = (double)opct / 100;
         }
-        
     }
 }

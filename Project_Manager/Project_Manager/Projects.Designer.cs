@@ -39,6 +39,7 @@
             this.project_lists.Dock = System.Windows.Forms.DockStyle.Fill;
             this.project_lists.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.project_lists.ForeColor = System.Drawing.SystemColors.Window;
+            this.project_lists.LabelEdit = true;
             this.project_lists.Location = new System.Drawing.Point(2, 37);
             this.project_lists.Margin = new System.Windows.Forms.Padding(0);
             this.project_lists.Name = "project_lists";
@@ -106,7 +107,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Silver;
+            this.BackColor = System.Drawing.Color.Red;
             this.ClientSize = new System.Drawing.Size(916, 559);
             this.Controls.Add(this.project_lists);
             this.Controls.Add(this.menu);
@@ -122,6 +123,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Project Manager";
+            this.Activated += new System.EventHandler(this.Projects_Activated);
             this.Deactivate += new System.EventHandler(this.Projects_Deactivate);
             this.Load += new System.EventHandler(this.Projects_Load);
             this.menu.ResumeLayout(false);

@@ -1,19 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Project_Manager {
     static class Program {
+        public static Color backColor = ColorTranslator.FromHtml("#202020"), foreColor = Color.White, borderColor = Color.Turquoise;
+        public static Projects projects;
+        public static ProjectStarter projectStarter;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main() {
+        static void Main(string[] args) {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Projects());
+
+            projects = new Projects();
+            projectStarter = new ProjectStarter();
+
+            //MessageBox.Show(args[0]);
+
+            if (args.Length >= 1) {
+                //MessageBox.Show(args[0]);
+                FileInfo file = new FileInfo(args[0]);
+                if (file.Exists) {
+                    //MessageBox.Show("Exists");
+                    projectStarter = new ProjectStarter();
+                    projectStarter.setProject(args[0]);
+                    Application.Run(projectStarter);
+                }
+            } else
+                Application.Run(projects);
         }
     }
 }

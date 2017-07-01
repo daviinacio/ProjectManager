@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Project_Manager {
     class ProjectItem {
+        //private static String configFileName = "\\config.prini";
         private IniFile configFile;
-        private String path;
+        private String file;
 
-        public ProjectItem(String path) {
-            configFile = new IniFile(@path + "/config.ini");
+        public ProjectItem(String file) {
+            configFile = new IniFile(file);
             configFile.Add("Name", "projectname");
-            configFile.Add("Icon", "icon.bmp");
+            configFile.Add("Icon", "{0}\\icon.bmp");
 
-            this.path = path;
+            this.file = file;
         }
 
         public void setName(String name) {
@@ -28,14 +30,20 @@ namespace Project_Manager {
             configFile.Write("Icon", icon);
         }
         public String getIcon() {
-            return path + "/" + configFile.Read("Icon");
+            //return path + "/" + configFile.Read("Icon");
+            return String.Format(configFile.Read("Icon"), getPath());
         }
 
-        public void setPath(String path) {
-            this.path = path;
+        public void setFile(String file) {
+            this.file = file;
+            configFile = new IniFile(file);
         }
         public String getPath() {
-            return path;
+            return Path.GetDirectoryName(file);
+        }
+
+        public String getFile() {
+            return file;
         }
     }
 }
