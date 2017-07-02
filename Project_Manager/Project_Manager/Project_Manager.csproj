@@ -45,6 +45,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IniFile.cs" />
+    <Compile Include="PrMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrMessageBox.Designer.cs">
+      <DependentUpon>PrMessageBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectAdder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProjectAdder.Designer.cs">
+      <DependentUpon>ProjectAdder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectCreator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProjectCreator.Designer.cs">
+      <DependentUpon>ProjectCreator.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProjectItem.cs" />
     <Compile Include="Projects.cs">
       <SubType>Form</SubType>
@@ -60,6 +78,15 @@
       <DependentUpon>ProjectStarter.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="PrMessageBox.resx">
+      <DependentUpon>PrMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectAdder.resx">
+      <DependentUpon>ProjectAdder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectCreator.resx">
+      <DependentUpon>ProjectCreator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Projects.resx">
       <DependentUpon>Projects.cs</DependentUpon>
     </EmbeddedResource>

@@ -7,14 +7,29 @@ using System.Threading.Tasks;
 
 namespace Project_Manager {
     class ProjectItem {
-        //private static String configFileName = "\\config.prini";
+        private static String localPathChar = "$";
+        private static char filesSeparator = '|';
+
         private IniFile configFile;
         private String file;
+
+        private List<String> files;
 
         public ProjectItem(String file) {
             configFile = new IniFile(file);
             configFile.Add("Name", "projectname");
-            configFile.Add("Icon", "{0}\\icon.bmp");
+            configFile.Add("Icon", localPathChar + "\\icon.bmp");
+            configFile.Add("Files", "");
+
+            // Load files
+            files = new List<String>();
+
+            if (!configFile.Read("Files").Equals("")) {
+                String[] fs = configFile.Read("Files").Split(filesSeparator);
+
+                foreach (String f in fs)
+                    files.Add(f);
+            }
 
             this.file = file;
         }
@@ -31,19 +46,46 @@ namespace Project_Manager {
         }
         public String getIcon() {
             //return path + "/" + configFile.Read("Icon");
-            return String.Format(configFile.Read("Icon"), getPath());
+            //return String.Format(configFile.Read("Icon"), getPath());
+            return configFile.Read("Icon").Replace(localPathChar, getPath());
         }
 
-        public void setFile(String file) {
+        /*public void setPFile(String file) {
             this.file = file;
             configFile = new IniFile(file);
         }
+        public String getPFile() {
+            return file;
+        }*/
+        
         public String getPath() {
-            return Path.GetDirectoryName(file);
+            return Path.GetDirectoryName(file) + '\\';
         }
 
-        public String getFile() {
-            return file;
+        // Files
+        public int getFilesCount() {
+            return files.Count;
         }
+
+        public List<String> getFilesList() {
+            return files;
+        }
+
+        public String getFile(int i) {
+            return files.ToArray()[i].Replace(localPathChar, getPath());;
+        }
+
+        public void addFile(String file) {
+            files.Add(file);
+        }
+
+        public void removeFile(int i) {
+            files.RemoveAt(i);
+        }
+
+        public void removeFile(String file) {
+            files.Remove(file);
+        }
+        
     }
 }

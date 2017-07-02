@@ -44,11 +44,12 @@ namespace Project_Manager {
             // Display grid lines.
             //project_lists.GridLines = true;
             // Sort the items in the list in ascending order.
-            project_lists.Sorting = SortOrder.Ascending;
+            //project_lists.Sorting = SortOrder.Ascending;
             //fadeUp(20, 5);
-
-            projects.Add("C:\\Users\\Davi\\Desktop\\PR0\\PR0.prini");
-            projects.Add("C:\\Users\\Davi\\Desktop\\PR1\\PR1.prini");
+            
+            projects.Add("C:\\Users\\Davi\\Documents\\GitHub\\BuyListManeger\\Android\\Buy List Manager.prini");
+            //projects.Add("C:\\Users\\Davi\\Desktop\\PR0\\PR0.prini");
+            //projects.Add("C:\\Users\\Davi\\Desktop\\PR1\\PR1.prini");
 
             update();
         }
@@ -61,6 +62,8 @@ namespace Project_Manager {
             imageListLarge.ColorDepth = ColorDepth.Depth32Bit;
 
             remove_menu.Enabled = edit_menu.Enabled = false;
+
+            project_lists.Clear();
 
             //project_lists.Clear();
 
@@ -88,6 +91,7 @@ namespace Project_Manager {
         }
 
         private void Projects_Activated(object sender, EventArgs e) {
+            canClose = true;
             //fadeUp(20, 5, 85);
             setOpacity(86);
         }
@@ -105,17 +109,34 @@ namespace Project_Manager {
         // Menu methods
 
         private void add_menu_Click(object sender, EventArgs e) {
-            MessageBox.Show("Add");
+            canClose = false;
+            ProjectAdder pr = new ProjectAdder();
+            pr.ShowDialog();
+
+            if (pr.fileName != "") {
+                //MessageBox.Show(pr.fileName);
+                projects.Add(pr.fileName);
+            } //else MessageBox.Show("Nenhum arquivo selecionado");
+
+            update();
         }
 
         private void remove_menu_Click(object sender, EventArgs e) {
+            canClose = false;
             if (project_lists.SelectedIndices.Count <= 0) { return; }
             int item = project_lists.SelectedIndices[0];
 
-            MessageBox.Show("Remove " + projects.ToArray()[item]);
+            if (PrMessageBox.Show("Remove project", "This project will be removed", "Ok", "Cancel") == PrMessageBox.R_Positive) {
+                projects.RemoveAt(item);
+            }
+
+            update();
+
+            //MessageBox.Show("Remove " + projects.ToArray()[item]);
         }
 
         private void edit_menu_Click(object sender, EventArgs e) {
+            canClose = false;
             if (project_lists.SelectedIndices.Count <= 0) { return; }
             int item = project_lists.SelectedIndices[0];
 

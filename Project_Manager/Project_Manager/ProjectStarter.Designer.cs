@@ -83,19 +83,23 @@
             this.files_listView.TabIndex = 6;
             this.files_listView.UseCompatibleStateImageBehavior = false;
             this.files_listView.View = System.Windows.Forms.View.Details;
+            this.files_listView.SelectedIndexChanged += new System.EventHandler(this.files_listView_SelectedIndexChanged);
+            this.files_listView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.files_listView_MouseDoubleClick);
             // 
             // file
             // 
             this.file.Text = "Arquivo";
-            this.file.Width = 120;
+            this.file.Width = 184;
             // 
             // diretory
             // 
             this.diretory.Text = "Diretorio";
-            this.diretory.Width = 247;
+            this.diretory.Width = 184;
             // 
             // timeOut_progressBar
             // 
+            this.timeOut_progressBar.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.timeOut_progressBar.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.timeOut_progressBar.Location = new System.Drawing.Point(15, 427);
             this.timeOut_progressBar.Name = "timeOut_progressBar";
             this.timeOut_progressBar.Size = new System.Drawing.Size(258, 39);
@@ -136,6 +140,7 @@
             this.openPath_button.TabIndex = 3;
             this.openPath_button.TabStop = true;
             this.openPath_button.Text = "Abrir diretorio do projeto";
+            this.openPath_button.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.openPath_button_LinkClicked);
             // 
             // start_button
             // 

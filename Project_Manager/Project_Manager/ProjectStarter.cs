@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -32,6 +33,7 @@ namespace Project_Manager {
 
             BackColor = openPath_button.LinkColor = list_panel.BackColor = Program.borderColor;
             back_panel.BackColor = start_button.BackColor = files_listView.BackColor = Program.backColor;
+            openPath_button.ActiveLinkColor = Color.White;
 
             //icon_pictureBox.ImageSize = new Size(96, 96);
             icon_pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
@@ -49,16 +51,18 @@ namespace Project_Manager {
             // Display grid lines.
             //files_listView.GridLines = true;
             // Sort the items in the list in ascending order.
-            files_listView.Sorting = SortOrder.Ascending;
+            //files_listView.Sorting = SortOrder.Ascending;
 
             // Load project information
             if (project != null) {
                 name_label.Text = project.getName();
                 icon_pictureBox.Image = Bitmap.FromFile(project.getIcon());
-                String[] files = { "C:\\Users\\File 1", "C:\\File 2"};
+                //String[] files = { "C:\\Users\\File 1", "C:\\File 2"};
 
-                for (int i = 0; i < files.Length; i++) {
-                    FileInfo file = new FileInfo(files[i]);
+                //MessageBox.Show(project.getFilesCount() + "");
+
+                for (int i = 0; i < project.getFilesCount(); i++) {
+                    FileInfo file = new FileInfo(project.getFile(i));
 
                     ListViewItem list = new ListViewItem(file.Name, i);
                     //list.i
@@ -88,6 +92,7 @@ namespace Project_Manager {
         }
 
         private void ProjectStarter_Deactivate(object sender, EventArgs e) {
+            //return;
             fadeDown(20, 5);
             if (Program.projects.Visible)
                 this.Hide();
@@ -114,8 +119,31 @@ namespace Project_Manager {
             }
         }
 
+        private void files_listView_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
+
+        private void files_listView_MouseDoubleClick(object sender, MouseEventArgs e) {
+
+        }
+
         private void start_button_Click(object sender, EventArgs e) {
-            MessageBox.Show("Start");
+            for (int i = 0; i < project.getFilesCount(); i++)
+                if (files_listView.Items.Find("", false)[i].Checked)
+                    try { Process.Start(project.getFile(i)); } 
+                    catch (System.ComponentModel.Win32Exception) { }
+        }
+
+        private void openPath_button_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            Process.Start(project.getPath());
+        }
+
+        public void ExecuteAsAdmin(string fileName) {
+            Process proc = new Process();
+            proc.StartInfo.FileName = fileName;
+            proc.StartInfo.UseShellExecute = true;
+            proc.StartInfo.Verb = "runas";
+            proc.Start();
         }
 
         public void setProject(String project) {
@@ -154,6 +182,5 @@ namespace Project_Manager {
         private void back_panel_MouseEnter(object sender, EventArgs e) {
             autoStart = false;
         }
-        
     }
 }
