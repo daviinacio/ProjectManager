@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Project_Manager.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -82,8 +84,13 @@ namespace Project_Manager {
                 list.SubItems.Add("Teste");
                 project_lists.Items.Add(list);
 
-                imageListSmall.Images.Add(Bitmap.FromFile(project.getIcon()));
-                imageListLarge.Images.Add(Bitmap.FromFile(project.getIcon()));
+                if (File.Exists(project.getIcon())) {
+                    imageListSmall.Images.Add(Bitmap.FromFile(project.getIcon()));
+                    imageListLarge.Images.Add(Bitmap.FromFile(project.getIcon()));
+                } else {
+                    imageListSmall.Images.Add(Resources.null_icon);
+                    imageListLarge.Images.Add(Resources.null_icon);
+                }
             }
 
             project_lists.LargeImageList = imageListLarge;
@@ -114,8 +121,13 @@ namespace Project_Manager {
             pr.ShowDialog();
 
             if (pr.fileName != "") {
+                canClose = false;
                 //MessageBox.Show(pr.fileName);
-                projects.Add(pr.fileName);
+                if (!projects.Contains(pr.fileName))
+                    projects.Add(pr.fileName);
+                else
+                    if (PrMessageBox.Show("Add error", "Esse arquivo já está no index.", null, "Ok") == PrMessageBox.R_Negative)
+                        add_menu_Click(null, null);
             } //else MessageBox.Show("Nenhum arquivo selecionado");
 
             update();
@@ -140,7 +152,7 @@ namespace Project_Manager {
             if (project_lists.SelectedIndices.Count <= 0) { return; }
             int item = project_lists.SelectedIndices[0];
 
-            MessageBox.Show("Edit " + projects.ToArray()[item]);
+            new ProjectCreator(projects.ToArray()[item]).ShowDialog();
         }
 
         private void fix_menu_Click(object sender, EventArgs e) {

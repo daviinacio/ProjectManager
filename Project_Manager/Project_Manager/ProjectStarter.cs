@@ -15,6 +15,7 @@ namespace Project_Manager {
     public partial class ProjectStarter : Form {
         private ProjectItem project;
         private bool autoStart = true;
+        private int timeOut = 5;
 
         private System.Windows.Forms.Timer backTast;
 
@@ -31,8 +32,11 @@ namespace Project_Manager {
             setOpacity(90);
             //TopMost = true;
 
-            BackColor = openPath_button.LinkColor = list_panel.BackColor = Program.borderColor;
-            back_panel.BackColor = start_button.BackColor = files_listView.BackColor = Program.backColor;
+            BackColor = /*openPath_button.LinkColor =*/ list_panel.BackColor = columns_gamb_tableLayoutPanel.BackColor =
+                /*timeOut_label.ForeColor =*/ start_panel.BackColor = Program.borderColor;
+
+            back_panel.BackColor = start_label.BackColor = files_listView.BackColor = 
+                file_column_gamb_label.BackColor = diretory_column_gamb_label.BackColor = Program.backColor;
             openPath_button.ActiveLinkColor = Color.White;
 
             //icon_pictureBox.ImageSize = new Size(96, 96);
@@ -56,7 +60,8 @@ namespace Project_Manager {
             // Load project information
             if (project != null) {
                 name_label.Text = project.getName();
-                icon_pictureBox.Image = Bitmap.FromFile(project.getIcon());
+                if(File.Exists(project.getIcon()))
+                    icon_pictureBox.Image = Bitmap.FromFile(project.getIcon());
                 //String[] files = { "C:\\Users\\File 1", "C:\\File 2"};
 
                 //MessageBox.Show(project.getFilesCount() + "");
@@ -76,13 +81,13 @@ namespace Project_Manager {
             } else
                 MessageBox.Show("Null");
 
-            timeOut_progressBar.Maximum = 300;
-            timeOut_progressBar.Minimum = 0;
-            timeOut_progressBar.Value = timeOut_progressBar.Minimum;
+            timeOut += 1;
+            timeOut *= 10;
+            timeOut -= 1;
 
             this.backTast = new System.Windows.Forms.Timer();
             this.backTast.Tick += new EventHandler(this.backTasking);
-            this.backTast.Interval = 10;
+            this.backTast.Interval = 100;
             this.backTast.Start();
         }
 
@@ -103,18 +108,31 @@ namespace Project_Manager {
 
         private void backTasking(object sender, EventArgs e) {
             if (autoStart) {
-                timeOut_progressBar.Visible = true;
+                timeOut_label.Visible = true;
                 openPath_button.Visible = false;
 
-                if (timeOut_progressBar.Value < timeOut_progressBar.Maximum -1) {
+                double segs = (int)timeOut / 10;
+
+                if (timeOut > 9) {
+                    timeOut--;
+                    //timeOut_label.Text = String.Format("{0} Seg(s) para abrir...", segs % 1 == 0 ? segs + ",0" : "" + segs);
+                    timeOut_label.Text = String.Format("{0} Seg(s) para abrir...", segs);
+                } else
+                if (timeOut == 9) {
+                    timeOut--;
+                    timeOut_label.Text = "Iniciando...";
+                    start_label_Click(null, null);
+                }
+
+                /*if (timeOut_progressBar.Value < timeOut_progressBar.Maximum -1) {
                     timeOut_progressBar.Value += 1;
                 } else
                 if(timeOut_progressBar.Value == timeOut_progressBar.Maximum -1) {
                     timeOut_progressBar.Value += 1;
                     start_button_Click(null, null);
-                }
+                }*/
             } else {
-                timeOut_progressBar.Visible = false;
+                timeOut_label.Visible = false;
                 openPath_button.Visible = true;
             }
         }
@@ -127,11 +145,10 @@ namespace Project_Manager {
 
         }
 
-        private void start_button_Click(object sender, EventArgs e) {
+        private void start_label_Click(object sender, EventArgs e) {
             for (int i = 0; i < project.getFilesCount(); i++)
                 if (files_listView.Items.Find("", false)[i].Checked)
-                    try { Process.Start(project.getFile(i)); } 
-                    catch (System.ComponentModel.Win32Exception) { }
+                    try { Process.Start(project.getFile(i)); } catch (System.ComponentModel.Win32Exception) { }
         }
 
         private void openPath_button_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {

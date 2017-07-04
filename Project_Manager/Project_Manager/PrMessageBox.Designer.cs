@@ -107,6 +107,8 @@
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "PrMessageBox";
             this.Padding = new System.Windows.Forms.Padding(2);
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PrMessageBox";
             this.Activated += new System.EventHandler(this.PrMessageBox_Activated);

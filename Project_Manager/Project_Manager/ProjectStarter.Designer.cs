@@ -24,29 +24,36 @@
         /// </summary>
         private void InitializeComponent() {
             this.back_panel = new System.Windows.Forms.Panel();
+            this.start_panel = new System.Windows.Forms.Panel();
+            this.start_label = new System.Windows.Forms.Label();
+            this.timeOut_label = new System.Windows.Forms.Label();
+            this.columns_gamb_tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.file_column_gamb_label = new System.Windows.Forms.Label();
+            this.diretory_column_gamb_label = new System.Windows.Forms.Label();
             this.list_panel = new System.Windows.Forms.Panel();
             this.files_listView = new System.Windows.Forms.ListView();
             this.file = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.diretory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.timeOut_progressBar = new System.Windows.Forms.ProgressBar();
             this.name_label = new System.Windows.Forms.Label();
             this.icon_pictureBox = new System.Windows.Forms.PictureBox();
             this.openPath_button = new System.Windows.Forms.LinkLabel();
-            this.start_button = new System.Windows.Forms.Button();
             this.title_label = new System.Windows.Forms.Label();
             this.back_panel.SuspendLayout();
+            this.start_panel.SuspendLayout();
+            this.columns_gamb_tableLayoutPanel.SuspendLayout();
             this.list_panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.icon_pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // back_panel
             // 
+            this.back_panel.Controls.Add(this.start_panel);
+            this.back_panel.Controls.Add(this.timeOut_label);
+            this.back_panel.Controls.Add(this.columns_gamb_tableLayoutPanel);
             this.back_panel.Controls.Add(this.list_panel);
-            this.back_panel.Controls.Add(this.timeOut_progressBar);
             this.back_panel.Controls.Add(this.name_label);
             this.back_panel.Controls.Add(this.icon_pictureBox);
             this.back_panel.Controls.Add(this.openPath_button);
-            this.back_panel.Controls.Add(this.start_button);
             this.back_panel.Controls.Add(this.title_label);
             this.back_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.back_panel.Location = new System.Drawing.Point(2, 2);
@@ -54,6 +61,84 @@
             this.back_panel.Size = new System.Drawing.Size(400, 480);
             this.back_panel.TabIndex = 0;
             this.back_panel.MouseEnter += new System.EventHandler(this.back_panel_MouseEnter);
+            // 
+            // start_panel
+            // 
+            this.start_panel.Controls.Add(this.start_label);
+            this.start_panel.Location = new System.Drawing.Point(279, 427);
+            this.start_panel.Name = "start_panel";
+            this.start_panel.Padding = new System.Windows.Forms.Padding(2);
+            this.start_panel.Size = new System.Drawing.Size(105, 35);
+            this.start_panel.TabIndex = 10;
+            // 
+            // start_label
+            // 
+            this.start_label.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.start_label.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.start_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.start_label.Location = new System.Drawing.Point(2, 2);
+            this.start_label.Name = "start_label";
+            this.start_label.Size = new System.Drawing.Size(101, 31);
+            this.start_label.TabIndex = 0;
+            this.start_label.Text = "Start";
+            this.start_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.start_label.Click += new System.EventHandler(this.start_label_Click);
+            // 
+            // timeOut_label
+            // 
+            this.timeOut_label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.timeOut_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeOut_label.Location = new System.Drawing.Point(19, 427);
+            this.timeOut_label.Name = "timeOut_label";
+            this.timeOut_label.Size = new System.Drawing.Size(254, 35);
+            this.timeOut_label.TabIndex = 9;
+            this.timeOut_label.Text = "3s para abrir...";
+            this.timeOut_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // columns_gamb_tableLayoutPanel
+            // 
+            this.columns_gamb_tableLayoutPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.columns_gamb_tableLayoutPanel.ColumnCount = 2;
+            this.columns_gamb_tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.columns_gamb_tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.columns_gamb_tableLayoutPanel.Controls.Add(this.file_column_gamb_label, 0, 0);
+            this.columns_gamb_tableLayoutPanel.Controls.Add(this.diretory_column_gamb_label, 1, 0);
+            this.columns_gamb_tableLayoutPanel.Location = new System.Drawing.Point(15, 159);
+            this.columns_gamb_tableLayoutPanel.Name = "columns_gamb_tableLayoutPanel";
+            this.columns_gamb_tableLayoutPanel.Padding = new System.Windows.Forms.Padding(1);
+            this.columns_gamb_tableLayoutPanel.RowCount = 1;
+            this.columns_gamb_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.columns_gamb_tableLayoutPanel.Size = new System.Drawing.Size(370, 25);
+            this.columns_gamb_tableLayoutPanel.TabIndex = 0;
+            // 
+            // file_column_gamb_label
+            // 
+            this.file_column_gamb_label.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.file_column_gamb_label.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.file_column_gamb_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.file_column_gamb_label.Location = new System.Drawing.Point(1, 1);
+            this.file_column_gamb_label.Margin = new System.Windows.Forms.Padding(0, 0, 1, 0);
+            this.file_column_gamb_label.Name = "file_column_gamb_label";
+            this.file_column_gamb_label.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.file_column_gamb_label.Size = new System.Drawing.Size(183, 23);
+            this.file_column_gamb_label.TabIndex = 0;
+            this.file_column_gamb_label.Text = "Arquivo";
+            this.file_column_gamb_label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // diretory_column_gamb_label
+            // 
+            this.diretory_column_gamb_label.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.diretory_column_gamb_label.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.diretory_column_gamb_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.diretory_column_gamb_label.Location = new System.Drawing.Point(185, 1);
+            this.diretory_column_gamb_label.Margin = new System.Windows.Forms.Padding(0);
+            this.diretory_column_gamb_label.Name = "diretory_column_gamb_label";
+            this.diretory_column_gamb_label.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.diretory_column_gamb_label.Size = new System.Drawing.Size(184, 23);
+            this.diretory_column_gamb_label.TabIndex = 1;
+            this.diretory_column_gamb_label.Text = "Diretorio";
+            this.diretory_column_gamb_label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // list_panel
             // 
@@ -96,16 +181,6 @@
             this.diretory.Text = "Diretorio";
             this.diretory.Width = 184;
             // 
-            // timeOut_progressBar
-            // 
-            this.timeOut_progressBar.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.timeOut_progressBar.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.timeOut_progressBar.Location = new System.Drawing.Point(15, 427);
-            this.timeOut_progressBar.Name = "timeOut_progressBar";
-            this.timeOut_progressBar.Size = new System.Drawing.Size(258, 39);
-            this.timeOut_progressBar.TabIndex = 7;
-            this.timeOut_progressBar.Value = 50;
-            // 
             // name_label
             // 
             this.name_label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -133,28 +208,15 @@
             // 
             this.openPath_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.openPath_button.AutoSize = true;
-            this.openPath_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openPath_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openPath_button.LinkColor = System.Drawing.Color.White;
             this.openPath_button.Location = new System.Drawing.Point(22, 442);
             this.openPath_button.Name = "openPath_button";
-            this.openPath_button.Size = new System.Drawing.Size(167, 18);
+            this.openPath_button.Size = new System.Drawing.Size(178, 20);
             this.openPath_button.TabIndex = 3;
             this.openPath_button.TabStop = true;
             this.openPath_button.Text = "Abrir diretorio do projeto";
             this.openPath_button.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.openPath_button_LinkClicked);
-            // 
-            // start_button
-            // 
-            this.start_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.start_button.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.start_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.start_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.start_button.Location = new System.Drawing.Point(279, 427);
-            this.start_button.Name = "start_button";
-            this.start_button.Size = new System.Drawing.Size(106, 39);
-            this.start_button.TabIndex = 2;
-            this.start_button.Text = "Start";
-            this.start_button.UseVisualStyleBackColor = false;
-            this.start_button.Click += new System.EventHandler(this.start_button_Click);
             // 
             // title_label
             // 
@@ -186,6 +248,8 @@
             this.Load += new System.EventHandler(this.ProjectStarter_Load);
             this.back_panel.ResumeLayout(false);
             this.back_panel.PerformLayout();
+            this.start_panel.ResumeLayout(false);
+            this.columns_gamb_tableLayoutPanel.ResumeLayout(false);
             this.list_panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.icon_pictureBox)).EndInit();
             this.ResumeLayout(false);
@@ -196,14 +260,18 @@
 
         private System.Windows.Forms.Panel back_panel;
         private System.Windows.Forms.Label title_label;
-        private System.Windows.Forms.Button start_button;
         private System.Windows.Forms.LinkLabel openPath_button;
         private System.Windows.Forms.Label name_label;
         private System.Windows.Forms.PictureBox icon_pictureBox;
         private System.Windows.Forms.ListView files_listView;
-        private System.Windows.Forms.ProgressBar timeOut_progressBar;
         private System.Windows.Forms.Panel list_panel;
         private System.Windows.Forms.ColumnHeader file;
         private System.Windows.Forms.ColumnHeader diretory;
+        private System.Windows.Forms.TableLayoutPanel columns_gamb_tableLayoutPanel;
+        private System.Windows.Forms.Label file_column_gamb_label;
+        private System.Windows.Forms.Label diretory_column_gamb_label;
+        private System.Windows.Forms.Label timeOut_label;
+        private System.Windows.Forms.Panel start_panel;
+        private System.Windows.Forms.Label start_label;
     }
 }

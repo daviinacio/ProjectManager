@@ -21,14 +21,16 @@ namespace Project_Manager {
         }
 
         private void ProjectAdder_Load(object sender, EventArgs e) {
-            BackColor = add_label.ForeColor = create_label.ForeColor = Program.borderColor;
+            BackColor = add_label.ForeColor = create_label.ForeColor = findFile_panel.BackColor = Program.borderColor;
             back_panel.BackColor = Program.backColor;
 
-            file_textBox.BackColor = findFile_button.BackColor = Program.backColor;
-            file_textBox.ForeColor = findFile_button.ForeColor = Program.foreColor;
+            file_textBox.BackColor = findFile_label.BackColor = Program.backColor;
+            file_textBox.ForeColor = findFile_label.ForeColor = Program.foreColor;
 
             openFileDialog.DefaultExt = DefaultExt;
             openFileDialog.Filter = Filter;
+
+            update();
         }
 
         private void ProjectAdder_Activated(object sender, EventArgs e) {
@@ -40,13 +42,12 @@ namespace Project_Manager {
             //this.Close();
         }
 
-        // Button click
-        private void findFile_button_Click(object sender, EventArgs e) {
+        // Label click
+        private void findFile_label_Click(object sender, EventArgs e) {
             openFileDialog.ShowDialog();
             file_textBox.Text = openFileDialog.FileName;
         }
 
-        // Label click
         private void add_label_Click(object sender, EventArgs e) {
             fileName = file_textBox.Text;
             fadeDown(10, 5);
@@ -58,7 +59,8 @@ namespace Project_Manager {
 
             prct.ShowDialog();
 
-            //file_textBox.Text = prct.fileName;
+            if(prct.fileName != null)
+                file_textBox.Text = prct.fileName;
         }
 
         private void cancel_label_Click(object sender, EventArgs e) {
@@ -68,11 +70,15 @@ namespace Project_Manager {
 
         private void file_textBox_TextChanged(object sender, EventArgs e) {
             add_label.Enabled = file_textBox.Text.Length > 0;
+            update();
+        }
+
+        private void update() {
+            add_label.ForeColor = add_label.Enabled ? Program.borderColor : Program.backColor;
         }
 
         // Fade methods
 
-        //int defaultOpct = 85;
         int opct = 0;
 
         private void fadeUp(int delay, int increment, int value) {

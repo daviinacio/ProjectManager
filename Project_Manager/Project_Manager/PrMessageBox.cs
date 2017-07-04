@@ -59,15 +59,19 @@ namespace Project_Manager {
             negative_label.Text = negative;
         }
 
-        public static int Show(String title, String message, String positive, String negative){
+        public static int Show(String title, String message, String positive, String negative) {
             PrMessageBox prmb = new PrMessageBox();
             prmb.setTitle(title);
             prmb.setMessage(message);
-            prmb.setPositive(positive);
-            prmb.setNegative(negative);
+
+            if (positive != "" && positive != null) prmb.setPositive(positive);
+            else prmb.positive_label.Visible = false;
+
+            if (positive != "" && negative != null) prmb.setNegative(negative);
+            else prmb.negative_label.Visible = false;
 
             prmb.ShowDialog();
-            
+
             return prmb.request;
         }
 

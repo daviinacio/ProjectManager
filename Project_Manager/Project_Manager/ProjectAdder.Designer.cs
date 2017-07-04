@@ -27,14 +27,16 @@
             this.create_label = new System.Windows.Forms.Label();
             this.add_label = new System.Windows.Forms.Label();
             this.cancel_label = new System.Windows.Forms.Label();
-            this.file_panel = new System.Windows.Forms.Panel();
-            this.file_label = new System.Windows.Forms.Label();
-            this.findFile_button = new System.Windows.Forms.Button();
-            this.file_textBox = new System.Windows.Forms.TextBox();
             this.title_label = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.file_textBox = new System.Windows.Forms.TextBox();
+            this.file_label = new System.Windows.Forms.Label();
+            this.file_panel = new System.Windows.Forms.Panel();
+            this.findFile_panel = new System.Windows.Forms.Panel();
+            this.findFile_label = new System.Windows.Forms.Label();
             this.back_panel.SuspendLayout();
             this.file_panel.SuspendLayout();
+            this.findFile_panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // back_panel
@@ -92,42 +94,15 @@
             this.cancel_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cancel_label.Click += new System.EventHandler(this.cancel_label_Click);
             // 
-            // file_panel
+            // title_label
             // 
-            this.file_panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.file_panel.BackColor = System.Drawing.Color.Transparent;
-            this.file_panel.Controls.Add(this.file_label);
-            this.file_panel.Controls.Add(this.findFile_button);
-            this.file_panel.Controls.Add(this.file_textBox);
-            this.file_panel.Location = new System.Drawing.Point(6, 30);
-            this.file_panel.Name = "file_panel";
-            this.file_panel.Size = new System.Drawing.Size(394, 61);
-            this.file_panel.TabIndex = 2;
-            // 
-            // file_label
-            // 
-            this.file_label.AutoSize = true;
-            this.file_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.file_label.Location = new System.Drawing.Point(3, 0);
-            this.file_label.Name = "file_label";
-            this.file_label.Size = new System.Drawing.Size(38, 16);
-            this.file_label.TabIndex = 6;
-            this.file_label.Text = "File:";
-            // 
-            // findFile_button
-            // 
-            this.findFile_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.findFile_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.findFile_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.findFile_button.Location = new System.Drawing.Point(316, 22);
-            this.findFile_button.Name = "findFile_button";
-            this.findFile_button.Size = new System.Drawing.Size(75, 26);
-            this.findFile_button.TabIndex = 2;
-            this.findFile_button.Text = "Find";
-            this.findFile_button.UseVisualStyleBackColor = true;
-            this.findFile_button.Click += new System.EventHandler(this.findFile_button_Click);
+            this.title_label.Dock = System.Windows.Forms.DockStyle.Top;
+            this.title_label.Location = new System.Drawing.Point(0, 0);
+            this.title_label.Name = "title_label";
+            this.title_label.Size = new System.Drawing.Size(406, 27);
+            this.title_label.TabIndex = 0;
+            this.title_label.Text = "Add project";
+            this.title_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // file_textBox
             // 
@@ -143,15 +118,53 @@
             this.file_textBox.TabIndex = 1;
             this.file_textBox.TextChanged += new System.EventHandler(this.file_textBox_TextChanged);
             // 
-            // title_label
+            // file_label
             // 
-            this.title_label.Dock = System.Windows.Forms.DockStyle.Top;
-            this.title_label.Location = new System.Drawing.Point(0, 0);
-            this.title_label.Name = "title_label";
-            this.title_label.Size = new System.Drawing.Size(406, 27);
-            this.title_label.TabIndex = 0;
-            this.title_label.Text = "Add project";
-            this.title_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.file_label.AutoSize = true;
+            this.file_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.file_label.Location = new System.Drawing.Point(3, 0);
+            this.file_label.Name = "file_label";
+            this.file_label.Size = new System.Drawing.Size(38, 16);
+            this.file_label.TabIndex = 6;
+            this.file_label.Text = "File:";
+            // 
+            // file_panel
+            // 
+            this.file_panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.file_panel.BackColor = System.Drawing.Color.Transparent;
+            this.file_panel.Controls.Add(this.findFile_panel);
+            this.file_panel.Controls.Add(this.file_label);
+            this.file_panel.Controls.Add(this.file_textBox);
+            this.file_panel.Location = new System.Drawing.Point(6, 30);
+            this.file_panel.Name = "file_panel";
+            this.file_panel.Size = new System.Drawing.Size(394, 61);
+            this.file_panel.TabIndex = 2;
+            // 
+            // findFile_panel
+            // 
+            this.findFile_panel.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.findFile_panel.Controls.Add(this.findFile_label);
+            this.findFile_panel.ForeColor = System.Drawing.Color.White;
+            this.findFile_panel.Location = new System.Drawing.Point(311, 21);
+            this.findFile_panel.Name = "findFile_panel";
+            this.findFile_panel.Padding = new System.Windows.Forms.Padding(1);
+            this.findFile_panel.Size = new System.Drawing.Size(80, 26);
+            this.findFile_panel.TabIndex = 7;
+            // 
+            // findFile_label
+            // 
+            this.findFile_label.BackColor = System.Drawing.Color.DimGray;
+            this.findFile_label.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.findFile_label.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.findFile_label.Location = new System.Drawing.Point(1, 1);
+            this.findFile_label.Name = "findFile_label";
+            this.findFile_label.Size = new System.Drawing.Size(78, 24);
+            this.findFile_label.TabIndex = 8;
+            this.findFile_label.Text = "Find";
+            this.findFile_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.findFile_label.Click += new System.EventHandler(this.findFile_label_Click);
             // 
             // ProjectAdder
             // 
@@ -174,6 +187,7 @@
             this.back_panel.ResumeLayout(false);
             this.file_panel.ResumeLayout(false);
             this.file_panel.PerformLayout();
+            this.findFile_panel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -181,14 +195,15 @@
         #endregion
 
         private System.Windows.Forms.Panel back_panel;
-        private System.Windows.Forms.Panel file_panel;
-        private System.Windows.Forms.Button findFile_button;
-        private System.Windows.Forms.TextBox file_textBox;
         private System.Windows.Forms.Label title_label;
         private System.Windows.Forms.Label add_label;
         private System.Windows.Forms.Label cancel_label;
         private System.Windows.Forms.Label create_label;
-        private System.Windows.Forms.Label file_label;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.Panel file_panel;
+        private System.Windows.Forms.Panel findFile_panel;
+        private System.Windows.Forms.Label findFile_label;
+        private System.Windows.Forms.Label file_label;
+        private System.Windows.Forms.TextBox file_textBox;
     }
 }
