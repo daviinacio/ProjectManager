@@ -20,6 +20,7 @@ namespace Project_Manager {
         }
 
         private void PrMessageBox_Load(object sender, EventArgs e) {
+            TopMost = Program.topMost;
             BackColor = positive_label.ForeColor = Program.borderColor;
             back_panel.BackColor = Program.backColor;
         }
@@ -73,6 +74,18 @@ namespace Project_Manager {
             prmb.ShowDialog();
 
             return prmb.request;
+        }
+
+        public static int Show(String title, String message, String positive) {
+            return Show(title, message, positive, "Ok");
+        }
+
+        public static int Show(String title, String message) {
+            return Show(title, message, null, "Ok");
+        }
+
+        public static int Show(String title) {
+            return Show(title, null, null, "Ok");
         }
 
         // Fade methods

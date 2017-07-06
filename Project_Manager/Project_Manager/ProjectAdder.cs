@@ -21,6 +21,7 @@ namespace Project_Manager {
         }
 
         private void ProjectAdder_Load(object sender, EventArgs e) {
+            TopMost = Program.topMost;
             BackColor = add_label.ForeColor = create_label.ForeColor = findFile_panel.BackColor = Program.borderColor;
             back_panel.BackColor = Program.backColor;
 
@@ -59,8 +60,8 @@ namespace Project_Manager {
 
             prct.ShowDialog();
 
-            if(prct.fileName != null)
-                file_textBox.Text = prct.fileName;
+            if(prct.getProject() != null)
+                file_textBox.Text = prct.getProject().getProjectFile();
         }
 
         private void cancel_label_Click(object sender, EventArgs e) {

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -13,6 +14,7 @@ using System.Windows.Forms;
 
 namespace Project_Manager {
     public partial class Projects : Form {
+        String projectsFile = Program.appdataFolder + "\\projects.txt";
 
         bool canClose = true, isFixed = false;
 
@@ -32,11 +34,25 @@ namespace Project_Manager {
             project_lists.BackColor = Program.backColor;
             menu.BackColor = Program.backColor;
             BackColor = Program.borderColor;
-            //TopMost = true;
+            TopMost = Program.topMost;
             project_lists.LabelEdit = true;
             //project_lists.View = View.Details;
 
             project_lists.Columns.Add("Project", -2, HorizontalAlignment.Left);
+
+            if (!File.Exists(projectsFile))
+                File.Create(projectsFile);
+
+            foreach (String pr in File.ReadLines(projectsFile)) {
+                if (File.Exists(pr))
+                    projects.Add(pr);
+                else {
+                    canClose = false;
+                    if (PrMessageBox.Show("Project not founded", "Project: '" + Path.GetFileName(pr) + "'\nThis project will be removed") == PrMessageBox.R_Negative) { }
+                }
+            }
+
+            saveProjectFile();
 
             //project_lists.AllowColumnReorder = true;
             // Display check boxes.
@@ -49,7 +65,8 @@ namespace Project_Manager {
             //project_lists.Sorting = SortOrder.Ascending;
             //fadeUp(20, 5);
             
-            projects.Add("C:\\Users\\Davi\\Documents\\GitHub\\BuyListManeger\\Android\\Buy List Manager.prini");
+            //projects.Add("C:\\Users\\Davi\\Documents\\GitHub\\BuyListManeger\\Android\\Buy List Manager.prini");
+            //projects.Add("C:/Users/Davi/Documents/GitHub/BuyListManeger/Android/Buy List Manager.prini");
             //projects.Add("C:\\Users\\Davi\\Desktop\\PR0\\PR0.prini");
             //projects.Add("C:\\Users\\Davi\\Desktop\\PR1\\PR1.prini");
 
@@ -66,8 +83,6 @@ namespace Project_Manager {
             remove_menu.Enabled = edit_menu.Enabled = false;
 
             project_lists.Clear();
-
-            //project_lists.Clear();
 
             //ProjectItem project = new ProjectItem("C:\\Users\\Davi\\Desktop");
             //MessageBox.Show("Nome: ");
@@ -123,13 +138,15 @@ namespace Project_Manager {
             if (pr.fileName != "") {
                 canClose = false;
                 //MessageBox.Show(pr.fileName);
-                if (!projects.Contains(pr.fileName))
+                if (!projects.Contains(pr.fileName)) {
                     projects.Add(pr.fileName);
-                else
+                    canClose = true;
+                } else
                     if (PrMessageBox.Show("Add error", "Esse arquivo já está no index.", null, "Ok") == PrMessageBox.R_Negative)
                         add_menu_Click(null, null);
             } //else MessageBox.Show("Nenhum arquivo selecionado");
 
+            saveProjectFile();
             update();
         }
 
@@ -142,6 +159,7 @@ namespace Project_Manager {
                 projects.RemoveAt(item);
             }
 
+            saveProjectFile();
             update();
 
             //MessageBox.Show("Remove " + projects.ToArray()[item]);
@@ -153,6 +171,8 @@ namespace Project_Manager {
             int item = project_lists.SelectedIndices[0];
 
             new ProjectCreator(projects.ToArray()[item]).ShowDialog();
+
+            update();
         }
 
         private void fix_menu_Click(object sender, EventArgs e) {
@@ -165,6 +185,10 @@ namespace Project_Manager {
                 fix_menu.BackColor = BackColor;
                 fix_menu.ForeColor = Program.backColor;
             }
+        }
+
+        private void saveProjectFile() {
+            File.WriteAllLines(projectsFile, projects);
         }
 
         // ListView methods
@@ -181,8 +205,12 @@ namespace Project_Manager {
             if (project_lists.SelectedIndices.Count <= 0) { return; }
             int item = project_lists.SelectedIndices[0];
 
-            Program.projectStarter = new ProjectStarter(projects.ToArray()[item]);
+            //Program.projectStarter = new ProjectStarter(projects.ToArray()[item]);
+            Program.projectStarter = new ProjectStarter();
+            Program.projectStarter.setProject(projects.ToArray()[item]);
             Program.projectStarter.Show();
+
+            //Process.Start(projects.ToArray()[item]);
 
             //MessageBox.Show("Open " +  projects.ToArray()[item].getName());
         }

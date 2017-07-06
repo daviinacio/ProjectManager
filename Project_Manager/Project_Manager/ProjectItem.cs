@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-class ProjectItem {
+public class ProjectItem {
     private static String localPathChar = "$";
     private static char filesSeparator = '|';
 
@@ -15,11 +15,12 @@ class ProjectItem {
 
     private List<String> files;
 
+    public ProjectItem() {
+        files = new List<String>();
+    }
+
     public ProjectItem(String file) {
-        configFile = new IniFile(file);
-        configFile.Add("Name", "projectname");
-        configFile.Add("Icon", localPathChar + "\\icon.bmp");
-        configFile.Add("Files", "");
+        create(file);
 
         // Load files
         files = new List<String>();
@@ -34,6 +35,28 @@ class ProjectItem {
         this.file = file;
     }
 
+    public void create(String file) {
+        this.file = file;
+        if (file != null) {
+            configFile = new IniFile(file);
+            configFile.Add("Name", "projectname");
+            configFile.Add("Icon", localPathChar + "\\icon.bmp");
+            configFile.Add("Files", "");
+        }
+    }
+
+    public void saveFiles() {
+        if (file != null) {
+            String fs = "";
+            for (int i = 0; i < files.Count; i++) {
+                fs += files.ToArray()[i];
+                if (i >= files.Count - 1) return;
+                fs += filesSeparator;
+            }
+            PrMessageBox.Show(fs);
+        }
+    }
+
     public void setName(String name) {
         configFile.Write("Name", name); 
     }
@@ -42,28 +65,21 @@ class ProjectItem {
     }
 
     public void setIcon(String icon) {
-        configFile.Write("Icon", icon);
+        configFile.Write("Icon", icon.Replace(getPath(), localPathChar));
     }
     public String getIcon() {
-        //return path + "/" + configFile.Read("Icon");
-        //return String.Format(configFile.Read("Icon"), getPath());
         return configFile.Read("Icon").Replace(localPathChar, getPath());
     }
-
-    /*public void setPFile(String file) {
-        this.file = file;
-        configFile = new IniFile(file);
-    }
-    public String getPFile() {
-        return file;
-    }*/
 
     public String getProjectFile() {
         return file;
     }
+    public void setProjectFile(String file) {
+        this.file = file;
+    }
         
     public String getPath() {
-        return Path.GetDirectoryName(file) + '\\';
+        return Path.GetDirectoryName(file).Replace('/', '\\');
     }
 
     // Files
@@ -76,19 +92,19 @@ class ProjectItem {
     }
 
     public String getFile(int i) {
-        return files.ToArray()[i].Replace(localPathChar, getPath());;
+        return files.ToArray()[i].Replace(localPathChar, getPath());
     }
 
     public void addFile(String file) {
-        files.Add(file);
+        files.Add(file); saveFiles();
     }
 
     public void removeFile(int i) {
-        files.RemoveAt(i);
+        files.RemoveAt(i); saveFiles();
     }
 
     public void removeFile(String file) {
-        files.Remove(file);
+        files.Remove(file); saveFiles();
     }
         
 }

@@ -11,6 +11,11 @@ namespace Project_Manager {
         public static Color backColor = ColorTranslator.FromHtml("#202020"), foreColor = Color.White, borderColor = Color.Turquoise;
         public static Projects projects;
         public static ProjectStarter projectStarter;
+
+        public static String appdataFolder = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\DaviApps\\Project Manager\\");
+
+        public static bool topMost = false;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -21,6 +26,9 @@ namespace Project_Manager {
 
             projects = new Projects();
             projectStarter = new ProjectStarter();
+
+            if (!Directory.Exists(appdataFolder))
+                Directory.CreateDirectory(appdataFolder);
 
             //MessageBox.Show(args[0]);
 

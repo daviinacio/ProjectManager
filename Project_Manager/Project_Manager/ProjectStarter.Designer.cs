@@ -89,7 +89,7 @@
             this.timeOut_label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.timeOut_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeOut_label.Location = new System.Drawing.Point(19, 427);
+            this.timeOut_label.Location = new System.Drawing.Point(15, 428);
             this.timeOut_label.Name = "timeOut_label";
             this.timeOut_label.Size = new System.Drawing.Size(254, 35);
             this.timeOut_label.TabIndex = 9;
@@ -168,7 +168,8 @@
             this.files_listView.TabIndex = 6;
             this.files_listView.UseCompatibleStateImageBehavior = false;
             this.files_listView.View = System.Windows.Forms.View.Details;
-            this.files_listView.SelectedIndexChanged += new System.EventHandler(this.files_listView_SelectedIndexChanged);
+            this.files_listView.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.files_listView_ItemCheck);
+            this.files_listView.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.files_listView_ItemChecked);
             this.files_listView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.files_listView_MouseDoubleClick);
             // 
             // file
@@ -208,7 +209,8 @@
             // 
             this.openPath_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.openPath_button.AutoSize = true;
-            this.openPath_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openPath_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openPath_button.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.openPath_button.LinkColor = System.Drawing.Color.White;
             this.openPath_button.Location = new System.Drawing.Point(22, 442);
             this.openPath_button.Name = "openPath_button";
@@ -216,6 +218,7 @@
             this.openPath_button.TabIndex = 3;
             this.openPath_button.TabStop = true;
             this.openPath_button.Text = "Abrir diretorio do projeto";
+            this.openPath_button.VisitedLinkColor = System.Drawing.Color.White;
             this.openPath_button.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.openPath_button_LinkClicked);
             // 
             // title_label

@@ -27,13 +27,13 @@
             this.create_label = new System.Windows.Forms.Label();
             this.add_label = new System.Windows.Forms.Label();
             this.cancel_label = new System.Windows.Forms.Label();
-            this.title_label = new System.Windows.Forms.Label();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.file_textBox = new System.Windows.Forms.TextBox();
-            this.file_label = new System.Windows.Forms.Label();
             this.file_panel = new System.Windows.Forms.Panel();
             this.findFile_panel = new System.Windows.Forms.Panel();
             this.findFile_label = new System.Windows.Forms.Label();
+            this.file_label = new System.Windows.Forms.Label();
+            this.file_textBox = new System.Windows.Forms.TextBox();
+            this.title_label = new System.Windows.Forms.Label();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.back_panel.SuspendLayout();
             this.file_panel.SuspendLayout();
             this.findFile_panel.SuspendLayout();
@@ -94,40 +94,6 @@
             this.cancel_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cancel_label.Click += new System.EventHandler(this.cancel_label_Click);
             // 
-            // title_label
-            // 
-            this.title_label.Dock = System.Windows.Forms.DockStyle.Top;
-            this.title_label.Location = new System.Drawing.Point(0, 0);
-            this.title_label.Name = "title_label";
-            this.title_label.Size = new System.Drawing.Size(406, 27);
-            this.title_label.TabIndex = 0;
-            this.title_label.Text = "Add project";
-            this.title_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // file_textBox
-            // 
-            this.file_textBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.file_textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.file_textBox.Enabled = false;
-            this.file_textBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.file_textBox.ForeColor = System.Drawing.Color.White;
-            this.file_textBox.Location = new System.Drawing.Point(10, 21);
-            this.file_textBox.Name = "file_textBox";
-            this.file_textBox.Size = new System.Drawing.Size(295, 26);
-            this.file_textBox.TabIndex = 1;
-            this.file_textBox.TextChanged += new System.EventHandler(this.file_textBox_TextChanged);
-            // 
-            // file_label
-            // 
-            this.file_label.AutoSize = true;
-            this.file_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.file_label.Location = new System.Drawing.Point(3, 0);
-            this.file_label.Name = "file_label";
-            this.file_label.Size = new System.Drawing.Size(38, 16);
-            this.file_label.TabIndex = 6;
-            this.file_label.Text = "File:";
-            // 
             // file_panel
             // 
             this.file_panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -165,6 +131,40 @@
             this.findFile_label.Text = "Find";
             this.findFile_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.findFile_label.Click += new System.EventHandler(this.findFile_label_Click);
+            // 
+            // file_label
+            // 
+            this.file_label.AutoSize = true;
+            this.file_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.file_label.Location = new System.Drawing.Point(3, 0);
+            this.file_label.Name = "file_label";
+            this.file_label.Size = new System.Drawing.Size(38, 16);
+            this.file_label.TabIndex = 6;
+            this.file_label.Text = "File:";
+            // 
+            // file_textBox
+            // 
+            this.file_textBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.file_textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.file_textBox.Enabled = false;
+            this.file_textBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.file_textBox.ForeColor = System.Drawing.Color.White;
+            this.file_textBox.Location = new System.Drawing.Point(10, 21);
+            this.file_textBox.Name = "file_textBox";
+            this.file_textBox.Size = new System.Drawing.Size(295, 26);
+            this.file_textBox.TabIndex = 1;
+            this.file_textBox.TextChanged += new System.EventHandler(this.file_textBox_TextChanged);
+            // 
+            // title_label
+            // 
+            this.title_label.Dock = System.Windows.Forms.DockStyle.Top;
+            this.title_label.Location = new System.Drawing.Point(0, 0);
+            this.title_label.Name = "title_label";
+            this.title_label.Size = new System.Drawing.Size(406, 27);
+            this.title_label.TabIndex = 0;
+            this.title_label.Text = "Add project";
+            this.title_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ProjectAdder
             // 

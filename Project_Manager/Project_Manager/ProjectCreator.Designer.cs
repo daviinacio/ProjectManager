@@ -24,7 +24,13 @@
         /// </summary>
         private void InitializeComponent() {
             this.back_panel = new System.Windows.Forms.Panel();
+            this.icon_diretory_label = new System.Windows.Forms.Label();
+            this.file_control_tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.remove_file_label = new System.Windows.Forms.Label();
+            this.edit_file_label = new System.Windows.Forms.Label();
+            this.add_file_label = new System.Windows.Forms.Label();
             this.name_panel = new System.Windows.Forms.Panel();
+            this.name_panel2 = new System.Windows.Forms.Panel();
             this.name_textBox = new System.Windows.Forms.TextBox();
             this.columns_gamb_tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.file_column_gamb_label = new System.Windows.Forms.Label();
@@ -41,24 +47,22 @@
             this.create_label = new System.Windows.Forms.Label();
             this.cancel_label = new System.Windows.Forms.Label();
             this.title_label = new System.Windows.Forms.Label();
-            this.name_panel2 = new System.Windows.Forms.Panel();
-            this.file_control_tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.edit_file_label = new System.Windows.Forms.Label();
-            this.remove_file_label = new System.Windows.Forms.Label();
-            this.add_file_label = new System.Windows.Forms.Label();
+            this.icon_openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.project_saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.back_panel.SuspendLayout();
+            this.file_control_tableLayoutPanel.SuspendLayout();
             this.name_panel.SuspendLayout();
+            this.name_panel2.SuspendLayout();
             this.columns_gamb_tableLayoutPanel.SuspendLayout();
             this.list_panel.SuspendLayout();
             this.icon_tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.icon_pictureBox)).BeginInit();
-            this.name_panel2.SuspendLayout();
-            this.file_control_tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // back_panel
             // 
             this.back_panel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.back_panel.Controls.Add(this.icon_diretory_label);
             this.back_panel.Controls.Add(this.file_control_tableLayoutPanel);
             this.back_panel.Controls.Add(this.name_panel);
             this.back_panel.Controls.Add(this.columns_gamb_tableLayoutPanel);
@@ -75,6 +79,79 @@
             this.back_panel.Size = new System.Drawing.Size(529, 369);
             this.back_panel.TabIndex = 0;
             // 
+            // icon_diretory_label
+            // 
+            this.icon_diretory_label.Location = new System.Drawing.Point(16, 162);
+            this.icon_diretory_label.Name = "icon_diretory_label";
+            this.icon_diretory_label.Size = new System.Drawing.Size(98, 23);
+            this.icon_diretory_label.TabIndex = 19;
+            this.icon_diretory_label.Text = "...";
+            this.icon_diretory_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.icon_diretory_label.Visible = false;
+            // 
+            // file_control_tableLayoutPanel
+            // 
+            this.file_control_tableLayoutPanel.BackColor = System.Drawing.Color.Gold;
+            this.file_control_tableLayoutPanel.ColumnCount = 1;
+            this.file_control_tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.file_control_tableLayoutPanel.Controls.Add(this.remove_file_label, 0, 2);
+            this.file_control_tableLayoutPanel.Controls.Add(this.edit_file_label, 0, 1);
+            this.file_control_tableLayoutPanel.Controls.Add(this.add_file_label, 0, 0);
+            this.file_control_tableLayoutPanel.Location = new System.Drawing.Point(15, 256);
+            this.file_control_tableLayoutPanel.Margin = new System.Windows.Forms.Padding(1);
+            this.file_control_tableLayoutPanel.Name = "file_control_tableLayoutPanel";
+            this.file_control_tableLayoutPanel.RowCount = 3;
+            this.file_control_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.file_control_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.file_control_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.file_control_tableLayoutPanel.Size = new System.Drawing.Size(100, 70);
+            this.file_control_tableLayoutPanel.TabIndex = 18;
+            // 
+            // remove_file_label
+            // 
+            this.remove_file_label.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.remove_file_label.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.remove_file_label.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.remove_file_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.remove_file_label.Location = new System.Drawing.Point(1, 47);
+            this.remove_file_label.Margin = new System.Windows.Forms.Padding(1);
+            this.remove_file_label.Name = "remove_file_label";
+            this.remove_file_label.Size = new System.Drawing.Size(98, 22);
+            this.remove_file_label.TabIndex = 0;
+            this.remove_file_label.Text = "Remove";
+            this.remove_file_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.remove_file_label.Click += new System.EventHandler(this.remove_file_label_Click);
+            // 
+            // edit_file_label
+            // 
+            this.edit_file_label.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.edit_file_label.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.edit_file_label.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.edit_file_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.edit_file_label.Location = new System.Drawing.Point(1, 23);
+            this.edit_file_label.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.edit_file_label.Name = "edit_file_label";
+            this.edit_file_label.Size = new System.Drawing.Size(98, 23);
+            this.edit_file_label.TabIndex = 19;
+            this.edit_file_label.Text = "Edit";
+            this.edit_file_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.edit_file_label.Click += new System.EventHandler(this.edit_file_label_Click);
+            // 
+            // add_file_label
+            // 
+            this.add_file_label.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.add_file_label.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.add_file_label.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.add_file_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.add_file_label.Location = new System.Drawing.Point(1, 1);
+            this.add_file_label.Margin = new System.Windows.Forms.Padding(1);
+            this.add_file_label.Name = "add_file_label";
+            this.add_file_label.Size = new System.Drawing.Size(98, 21);
+            this.add_file_label.TabIndex = 20;
+            this.add_file_label.Text = "Add";
+            this.add_file_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.add_file_label.Click += new System.EventHandler(this.add_file_label_Click);
+            // 
             // name_panel
             // 
             this.name_panel.BackColor = System.Drawing.Color.Gold;
@@ -84,6 +161,17 @@
             this.name_panel.Padding = new System.Windows.Forms.Padding(1);
             this.name_panel.Size = new System.Drawing.Size(376, 28);
             this.name_panel.TabIndex = 17;
+            // 
+            // name_panel2
+            // 
+            this.name_panel2.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.name_panel2.Controls.Add(this.name_textBox);
+            this.name_panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.name_panel2.Location = new System.Drawing.Point(1, 1);
+            this.name_panel2.Name = "name_panel2";
+            this.name_panel2.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.name_panel2.Size = new System.Drawing.Size(374, 26);
+            this.name_panel2.TabIndex = 0;
             // 
             // name_textBox
             // 
@@ -281,80 +369,6 @@
             this.title_label.Text = "Create project";
             this.title_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // name_panel2
-            // 
-            this.name_panel2.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.name_panel2.Controls.Add(this.name_textBox);
-            this.name_panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.name_panel2.Location = new System.Drawing.Point(1, 1);
-            this.name_panel2.Name = "name_panel2";
-            this.name_panel2.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.name_panel2.Size = new System.Drawing.Size(374, 26);
-            this.name_panel2.TabIndex = 0;
-            // 
-            // file_control_tableLayoutPanel
-            // 
-            this.file_control_tableLayoutPanel.BackColor = System.Drawing.Color.Gold;
-            this.file_control_tableLayoutPanel.ColumnCount = 1;
-            this.file_control_tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.file_control_tableLayoutPanel.Controls.Add(this.remove_file_label, 0, 2);
-            this.file_control_tableLayoutPanel.Controls.Add(this.edit_file_label, 0, 1);
-            this.file_control_tableLayoutPanel.Controls.Add(this.add_file_label, 0, 0);
-            this.file_control_tableLayoutPanel.Location = new System.Drawing.Point(15, 256);
-            this.file_control_tableLayoutPanel.Margin = new System.Windows.Forms.Padding(1);
-            this.file_control_tableLayoutPanel.Name = "file_control_tableLayoutPanel";
-            this.file_control_tableLayoutPanel.RowCount = 3;
-            this.file_control_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.file_control_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.file_control_tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.file_control_tableLayoutPanel.Size = new System.Drawing.Size(100, 70);
-            this.file_control_tableLayoutPanel.TabIndex = 18;
-            // 
-            // edit_file_label
-            // 
-            this.edit_file_label.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.edit_file_label.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.edit_file_label.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.edit_file_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.edit_file_label.Location = new System.Drawing.Point(1, 23);
-            this.edit_file_label.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.edit_file_label.Name = "edit_file_label";
-            this.edit_file_label.Size = new System.Drawing.Size(98, 23);
-            this.edit_file_label.TabIndex = 19;
-            this.edit_file_label.Text = "Edit";
-            this.edit_file_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.edit_file_label.Click += new System.EventHandler(this.edit_file_label_Click);
-            // 
-            // remove_file_label
-            // 
-            this.remove_file_label.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.remove_file_label.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.remove_file_label.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.remove_file_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.remove_file_label.Location = new System.Drawing.Point(1, 47);
-            this.remove_file_label.Margin = new System.Windows.Forms.Padding(1);
-            this.remove_file_label.Name = "remove_file_label";
-            this.remove_file_label.Size = new System.Drawing.Size(98, 22);
-            this.remove_file_label.TabIndex = 0;
-            this.remove_file_label.Text = "Remove";
-            this.remove_file_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.remove_file_label.Click += new System.EventHandler(this.remove_file_label_Click);
-            // 
-            // add_file_label
-            // 
-            this.add_file_label.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.add_file_label.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.add_file_label.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.add_file_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.add_file_label.Location = new System.Drawing.Point(1, 1);
-            this.add_file_label.Margin = new System.Windows.Forms.Padding(1);
-            this.add_file_label.Name = "add_file_label";
-            this.add_file_label.Size = new System.Drawing.Size(98, 21);
-            this.add_file_label.TabIndex = 20;
-            this.add_file_label.Text = "Add";
-            this.add_file_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.add_file_label.Click += new System.EventHandler(this.add_file_label_Click);
-            // 
             // ProjectCreator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -376,14 +390,14 @@
             this.Load += new System.EventHandler(this.ProjectCreator_Load);
             this.back_panel.ResumeLayout(false);
             this.back_panel.PerformLayout();
+            this.file_control_tableLayoutPanel.ResumeLayout(false);
             this.name_panel.ResumeLayout(false);
+            this.name_panel2.ResumeLayout(false);
+            this.name_panel2.PerformLayout();
             this.columns_gamb_tableLayoutPanel.ResumeLayout(false);
             this.list_panel.ResumeLayout(false);
             this.icon_tableLayoutPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.icon_pictureBox)).EndInit();
-            this.name_panel2.ResumeLayout(false);
-            this.name_panel2.PerformLayout();
-            this.file_control_tableLayoutPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -413,5 +427,8 @@
         private System.Windows.Forms.Label edit_file_label;
         private System.Windows.Forms.Label remove_file_label;
         private System.Windows.Forms.Label add_file_label;
+        private System.Windows.Forms.Label icon_diretory_label;
+        private System.Windows.Forms.OpenFileDialog icon_openFileDialog;
+        private System.Windows.Forms.SaveFileDialog project_saveFileDialog;
     }
 }

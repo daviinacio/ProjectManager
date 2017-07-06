@@ -16,6 +16,7 @@ namespace Project_Manager {
         private ProjectItem project;
         private bool autoStart = true;
         private int timeOut = 5;
+        private bool canClose = true;
 
         private System.Windows.Forms.Timer backTast;
 
@@ -30,7 +31,7 @@ namespace Project_Manager {
 
         private void ProjectStarter_Load(object sender, EventArgs e) {
             setOpacity(90);
-            //TopMost = true;
+            TopMost = Program.topMost;
 
             BackColor = /*openPath_button.LinkColor =*/ list_panel.BackColor = columns_gamb_tableLayoutPanel.BackColor =
                 /*timeOut_label.ForeColor =*/ start_panel.BackColor = Program.borderColor;
@@ -64,14 +65,27 @@ namespace Project_Manager {
                     icon_pictureBox.Image = Bitmap.FromFile(project.getIcon());
                 //String[] files = { "C:\\Users\\File 1", "C:\\File 2"};
 
+                //canClose = false;
+                //PrMessageBox.Show("File name", project.getProjectFile());
+
                 //MessageBox.Show(project.getFilesCount() + "");
 
                 for (int i = 0; i < project.getFilesCount(); i++) {
                     FileInfo file = new FileInfo(project.getFile(i));
 
                     ListViewItem list = new ListViewItem(file.Name, i);
-                    //list.i
+
+                    //canClose = false;
+                    //PrMessageBox.Show("File name", project.getFile(i));
+
                     list.Checked = true;
+
+                    if (!file.Exists) {
+                        list.Checked = false;
+                        list.BackColor = Color.OrangeRed;
+                        list.ForeColor = Color.White;
+                    }
+                    
                     list.SubItems.Add(file.DirectoryName);
                     files_listView.Items.Add(list);
 
@@ -94,15 +108,18 @@ namespace Project_Manager {
         private void ProjectStarter_Activated(object sender, EventArgs e) {
             //fadeUp(10, 5, 90);
             setOpacity(90);
+            canClose = true;
         }
 
         private void ProjectStarter_Deactivate(object sender, EventArgs e) {
             //return;
-            fadeDown(20, 5);
-            if (Program.projects.Visible)
-                this.Hide();
-            else
-                Application.Exit();
+            if (canClose) {
+                fadeDown(20, 5);
+                if (Program.projects.Visible)
+                    this.Hide();
+                else
+                    Application.Exit();
+            }
             //Application.Exit();
         }
 
@@ -135,10 +152,6 @@ namespace Project_Manager {
                 timeOut_label.Visible = false;
                 openPath_button.Visible = true;
             }
-        }
-
-        private void files_listView_SelectedIndexChanged(object sender, EventArgs e) {
-
         }
 
         private void files_listView_MouseDoubleClick(object sender, MouseEventArgs e) {
@@ -198,6 +211,20 @@ namespace Project_Manager {
 
         private void back_panel_MouseEnter(object sender, EventArgs e) {
             autoStart = false;
+        }
+
+        private void files_listView_ItemCheck(object sender, ItemCheckEventArgs e) {
+            if (e.NewValue == CheckState.Checked) {
+                if(!File.Exists(project.getFile(e.Index))){
+                    canClose = false;
+                    PrMessageBox.Show("Check error", "Este arquivo não existe");
+                }
+            }
+        }
+
+        private void files_listView_ItemChecked(object sender, ItemCheckedEventArgs e) {
+            if(!File.Exists(project.getFile(e.Item.Index)))
+                e.Item.Checked = false;
         }
     }
 }

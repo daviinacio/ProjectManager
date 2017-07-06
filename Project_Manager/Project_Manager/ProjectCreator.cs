@@ -13,8 +13,10 @@ using System.Windows.Forms;
 
 namespace Project_Manager {
     public partial class ProjectCreator : Form {
-        public String fileName = null;
+        //public String fileName = null;
         private ProjectItem project;
+        private static bool NEW_MODE = true, EDIT_MODE = false;
+        private bool Mode;
 
         public ProjectCreator() {
             InitializeComponent();
@@ -22,11 +24,12 @@ namespace Project_Manager {
 
         public ProjectCreator(String fileName) {
             InitializeComponent();
-            this.fileName = fileName;
             this.project = new ProjectItem(fileName);
         }
 
         private void ProjectCreator_Load(object sender, EventArgs e) {
+            TopMost = Program.topMost;
+
             BackColor = create_label.ForeColor = icon_tableLayoutPanel.BackColor =
                 list_panel.BackColor = columns_gamb_tableLayoutPanel.BackColor = name_panel.BackColor =
                 file_control_tableLayoutPanel.BackColor = Program.borderColor;
@@ -38,30 +41,77 @@ namespace Project_Manager {
 
             icon_pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
 
-            if (fileName != null) {
+            project_saveFileDialog.DefaultExt = ".prini";
+            project_saveFileDialog.Filter = "Project loader file|*.prini";
+
+            icon_openFileDialog.DefaultExt = ".png";
+            icon_openFileDialog.Filter = "Image file|*.png;*.jpeg;*.jpg;*.bmp|PNG file|*.png|JPEG file|*.jpeg|JPG file|*.jpg|BMP file|*.bmp";
+
+            Mode = project == null ? NEW_MODE : EDIT_MODE;
+
+            if (Mode == EDIT_MODE) {
                 title_label.Text = "Edit project";
                 create_label.Text = "Edit";
                 name_textBox.Text = project.getName();
+                icon_diretory_label.Text = project.getIcon();
                 if (File.Exists(project.getIcon()))
                     icon_pictureBox.Image = Bitmap.FromFile(project.getIcon());
                 else
                     icon_pictureBox.Image = Resources.null_icon;
+            } else if(Mode == NEW_MODE){
+                icon_pictureBox.Image = Resources.null_icon;
+                project = new ProjectItem();
             }
+
+            updateFiles();
         }
 
         private void create_label_Click(object sender, EventArgs e) {
+            if (Mode == NEW_MODE) {
+                while(true){
+                    project_saveFileDialog.ShowDialog();
+                    if (project_saveFileDialog.FileName != "") {
+                        PrMessageBox.Show("", project_saveFileDialog.FileName);
+                        project.create(project_saveFileDialog.FileName);
+                        break;
+                    } else
+                        if (PrMessageBox.Show("Create error", "Salve o arquivo do projeto", "Ok", "Cancelar") == PrMessageBox.R_Negative) {
+                            //cancel_label_Click(null, null);
+                            return;
+                        }
+                }
+            } else if (Mode == EDIT_MODE) {
+
+            }
+
+            project.setName(name_textBox.Text);
+            project.setIcon(icon_diretory_label.Text);
+            project.saveFiles();
+
             fadeDown(10, 5);
             this.Close();
         }
 
         private void cancel_label_Click(object sender, EventArgs e) {
-            fileName = null;
+            project = null;
             fadeDown(10, 5);
             this.Close();
         }
 
         private void ProjectCreator_Activated(object sender, EventArgs e) {
             setOpacity(90);
+        }
+
+        // Methods
+
+        private void updateFiles() {
+
+        }
+
+        // Getter
+
+        public ProjectItem getProject() {
+            return this.project;
         }
 
         // Fade methods
@@ -91,6 +141,8 @@ namespace Project_Manager {
 
         private void add_file_label_Click(object sender, EventArgs e) {
             PrMessageBox.Show("", "Add file", null, "Ok");
+            //if(project != null)
+            project.saveFiles();
         }
 
         private void edit_file_label_Click(object sender, EventArgs e) {
@@ -102,7 +154,11 @@ namespace Project_Manager {
         }
 
         private void choose_icon_label_Click(object sender, EventArgs e) {
-            PrMessageBox.Show("", "Choose icon", null, "Ok");
+            icon_openFileDialog.ShowDialog();
+            if (icon_openFileDialog.FileName != "") {
+                icon_diretory_label.Text = icon_openFileDialog.FileName;
+                icon_pictureBox.Image = Bitmap.FromFile(icon_openFileDialog.FileName);
+            }
         }
     }
 }
