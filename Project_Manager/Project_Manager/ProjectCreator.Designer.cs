@@ -49,6 +49,7 @@
             this.title_label = new System.Windows.Forms.Label();
             this.icon_openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.project_saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.files_openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.back_panel.SuspendLayout();
             this.file_control_tableLayoutPanel.SuspendLayout();
             this.name_panel.SuspendLayout();
@@ -430,5 +431,6 @@
         private System.Windows.Forms.Label icon_diretory_label;
         private System.Windows.Forms.OpenFileDialog icon_openFileDialog;
         private System.Windows.Forms.SaveFileDialog project_saveFileDialog;
+        private System.Windows.Forms.OpenFileDialog files_openFileDialog;
     }
 }

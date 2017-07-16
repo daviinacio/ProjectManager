@@ -16,6 +16,7 @@ public class ProjectItem {
     private List<String> files;
 
     public ProjectItem() {
+        file = "";
         files = new List<String>();
     }
 
@@ -49,11 +50,12 @@ public class ProjectItem {
         if (file != null) {
             String fs = "";
             for (int i = 0; i < files.Count; i++) {
-                fs += files.ToArray()[i];
-                if (i >= files.Count - 1) return;
+                fs += files.ToArray()[i].Replace(getPath(), localPathChar);
+                if (i >= files.Count - 1) continue;
                 fs += filesSeparator;
             }
-            PrMessageBox.Show(fs);
+            configFile.Write("Files", fs);
+            //PrMessageBox.Show("Files", fs);
         }
     }
 
@@ -92,19 +94,22 @@ public class ProjectItem {
     }
 
     public String getFile(int i) {
-        return files.ToArray()[i].Replace(localPathChar, getPath());
+        if (this.file != "")
+            return files.ToArray()[i].Replace(localPathChar, getPath());
+        else
+            return files.ToArray()[i];
     }
 
     public void addFile(String file) {
-        files.Add(file); saveFiles();
+        files.Add(file); //saveFiles();
     }
 
     public void removeFile(int i) {
-        files.RemoveAt(i); saveFiles();
+        files.RemoveAt(i); //saveFiles();
     }
 
     public void removeFile(String file) {
-        files.Remove(file); saveFiles();
+        files.Remove(file); //saveFiles();
     }
         
 }

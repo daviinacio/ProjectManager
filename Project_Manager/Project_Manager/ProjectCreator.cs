@@ -49,6 +49,8 @@ namespace Project_Manager {
 
             Mode = project == null ? NEW_MODE : EDIT_MODE;
 
+            files_listView.FullRowSelect = true;
+
             if (Mode == EDIT_MODE) {
                 title_label.Text = "Edit project";
                 create_label.Text = "Edit";
@@ -105,7 +107,35 @@ namespace Project_Manager {
         // Methods
 
         private void updateFiles() {
+            if (project != null) {
+                files_listView.Items.Clear();
+                //listView1.Clear();
 
+                for (int i = 0; i < project.getFilesCount(); i++) {
+                    FileInfo file = new FileInfo(project.getFile(i));
+
+                    ListViewItem list = new ListViewItem(file.Name, i);
+
+                    //PrMessageBox.Show("File name", project.getFile(i));
+
+                    list.Checked = true;
+
+                    if (!file.Exists) {
+                        list.Checked = false;
+                        list.BackColor = Color.OrangeRed;
+                        list.ForeColor = Color.White;
+                    }
+
+                    list.SubItems.Add(file.DirectoryName);
+                    files_listView.Items.Add(list);
+
+                    //PrMessageBox.Show("Teste", files_listView.Items[i].Text);
+
+                    //imageListSmall.Images.Add(Bitmap.FromFile(project.getIcon()));
+                    //imageListLarge.Images.Add(Bitmap.FromFile(project.getIcon()));
+                }
+            } else
+                MessageBox.Show("Null");
         }
 
         // Getter
@@ -140,17 +170,28 @@ namespace Project_Manager {
         }
 
         private void add_file_label_Click(object sender, EventArgs e) {
-            PrMessageBox.Show("", "Add file", null, "Ok");
+            //PrMessageBox.Show("", "Add file", null, "Ok");
             //if(project != null)
-            project.saveFiles();
+            files_openFileDialog.ShowDialog();
+
+            if (files_openFileDialog.FileName == "") return;
+
+            project.addFile(files_openFileDialog.FileName);
+            updateFiles();
         }
 
         private void edit_file_label_Click(object sender, EventArgs e) {
             PrMessageBox.Show("", "Edit file", null, "Ok");
+            project.saveFiles();
+            updateFiles();
         }
 
         private void remove_file_label_Click(object sender, EventArgs e) {
-            PrMessageBox.Show("", "Remove file", null, "Ok");
+            //PrMessageBox.Show("", "Remove file", null, "Ok");
+            if (files_listView.SelectedIndices.Count <= 0) { return; }
+            int item = files_listView.SelectedIndices[0];
+            project.removeFile(item);
+            updateFiles();
         }
 
         private void choose_icon_label_Click(object sender, EventArgs e) {

@@ -165,7 +165,8 @@ namespace Project_Manager {
         }
 
         private void openPath_button_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            Process.Start(project.getPath());
+            String local = project.getPath() + "\\";
+            Process.Start(local);
         }
 
         public void ExecuteAsAdmin(string fileName) {
