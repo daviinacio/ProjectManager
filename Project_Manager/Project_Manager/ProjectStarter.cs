@@ -119,6 +119,8 @@ namespace Project_Manager {
                     this.Hide();
                 else
                     Application.Exit();
+
+                this.backTast.Stop();
             }
             //Application.Exit();
         }
@@ -129,6 +131,8 @@ namespace Project_Manager {
                 openPath_button.Visible = false;
 
                 double segs = (int)timeOut / 10;
+
+                //Console.WriteLine(segs + " Segundos");
 
                 if (timeOut > 9) {
                     timeOut--;
